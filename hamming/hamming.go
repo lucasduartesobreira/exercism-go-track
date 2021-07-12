@@ -1,17 +1,17 @@
 package hamming
 
 import (
-	"fmt"
+	"errors"
 )
 
-//ERROR_MESSAGE is the error message for when both strings has different length
-const ERROR_MESSAGE string = "Cannot compare two strings that differentiate on length"
+//ErrorMessage is the error message for when both strings has different length
+const ErrorMessage string = "Cannot compare two strings that differentiate on length"
 
 // Distance receive strings a and b as parameters and return how many runes that differentiate the variable a from b.
 // It can return a error if a and b has different length
 func Distance(a, b string) (int, error) {
 	if !hasSameLength(a, b) {
-		return 0, fmt.Errorf(ERROR_MESSAGE)
+		return 0, errors.New(ErrorMessage)
 	}
 	return difference(a, b), nil
 }
@@ -35,8 +35,5 @@ func difference(a, b string) int {
 
 //isEqual receive runes a and b as parameters and return if they are equal
 func isEqual(a rune, b rune) bool {
-	if a == b {
-		return true
-	}
-	return false
+	return a == b
 }
