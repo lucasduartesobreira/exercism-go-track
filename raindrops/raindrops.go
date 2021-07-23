@@ -4,10 +4,13 @@ package raindrops
 import "strconv"
 
 // factorAndMessage is the map between the factor and its specified message
-var factorAndMessage = map[int]string{
-	3: "Pling",
-	5: "Plang",
-	7: "Plong",
+var factorAndMessage = []struct {
+	factor  int
+	message string
+}{
+	{3, "Pling"},
+	{5, "Plang"},
+	{7, "Plong"},
 }
 
 // Convert take raindrops as parameter and return its custom message
@@ -17,8 +20,7 @@ var factorAndMessage = map[int]string{
 // If raindrops has 7 as a factor, will add 'Plong' to the result
 // If raindrops does not have any of 3,5 or 7 as a factor, return raindrops
 func Convert(raindrops int) string {
-	result := makeResponse(raindrops)
-	return result
+	return makeResponse(raindrops)
 }
 
 // makeResponse take raindrops as parameter and will make the custom message
@@ -26,7 +28,9 @@ func Convert(raindrops int) string {
 func makeResponse(raindrops int) string {
 	result := ""
 
-	for factor, message := range factorAndMessage {
+	for _, factorAndMessageStruct := range factorAndMessage {
+		factor := factorAndMessageStruct.factor
+		message := factorAndMessageStruct.message
 		if isFactor(raindrops, factor) {
 			result += message
 		}
@@ -35,6 +39,7 @@ func makeResponse(raindrops int) string {
 	if result == "" {
 		return strconv.Itoa(raindrops)
 	}
+
 	return result
 }
 
