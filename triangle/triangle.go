@@ -29,10 +29,7 @@ func KindFromSides(a, b, c float64) Kind {
 
 // isNotATriangle return if the given lengths make a triangle.
 func isNotATriangle(a, b, c float64) bool {
-	if isInvalidLength(a, b, c) {
-		return true
-	}
-	return a > b+c || b > a+c || c > a+b
+	return isInvalidLength(a, b, c) || a > b+c || b > a+c || c > a+b
 }
 
 // isInvalidLength return if the given lengths are invalid. That means a,b and c contained on the interval ]0,Inf[.
